@@ -1,0 +1,36 @@
+# ---------------- 构建产物 ----------------
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+
+# ---------------- 依赖 ----------------
+node_modules/
+
+# ---------------- IDE ----------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.code-workspace
+
+# ---------------- 本地私密配置（含口令与密钥，务必不要提交）----------------
+**/application-local.properties
+**/*.local.properties
+账号密码.txt
+
+# ---------------- 运行时上传目录（只保留占位文件）----------------
+springboot/files/*
+!springboot/files/.gitkeep
+
+# ---------------- 日志与系统文件 ----------------
+*.log
+logs/
+.DS_Store
+Thumbs.db
+
+# ---------------- 前端构建产物 ----------------
+vue/dist/

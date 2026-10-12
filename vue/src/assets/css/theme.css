@@ -1,0 +1,345 @@
+/* =========================================================
+ * 设计令牌 (Design Tokens)
+ * 主色：生鲜绿  辅助/价格：活力橙
+ * 全站样式统一以此文件为准，页面内请使用 var(--*) 而非硬编码色值
+ * ========================================================= */
+:root {
+  /* ---------- 主色 - 生鲜绿 (新鲜、健康、可信赖) ---------- */
+  --color-primary: #67C23A;
+  --color-primary-light: #e1f3d8;
+  --color-primary-dark: #529b2e;
+
+  /* ---------- 辅助色 - 活力橙 (促销、点缀、食欲) ---------- */
+  --color-secondary: #FF7D00;
+  --color-secondary-light: #fff3e6;
+  --color-secondary-dark: #e66f00;
+
+  /* 语义别名：强调 / 价格 */
+  --color-accent: #FF7D00;
+  --color-accent-dark: #e66f00;
+  --color-accent-light: #fff3e6;
+  --color-price: #FF7D00;
+
+  /* ---------- 功能色 ---------- */
+  --color-success: #67C23A;
+  --color-warning: #faad14;
+  --color-danger: #f56c6c;
+  --color-info: #909399;
+
+  /* ---------- 文字色 ---------- */
+  --text-main: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #c0c4cc;
+
+  /* ---------- 边框与背景 ---------- */
+  --border-color-base: #dcdfe6;
+  --border-color-light: #ebeef5;
+  --bg-body: #f7f8fa;
+  --bg-white: #ffffff;
+
+  /* ---------- 圆角 ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* ---------- 间距 ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* ---------- 字号 ---------- */
+  --font-sm: 12px;
+  --font-md: 14px;
+  --font-lg: 16px;
+  --font-xl: 20px;
+
+  /* ---------- 阴影 ---------- */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-base: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-primary: 0 8px 24px rgba(103, 194, 58, 0.18);
+
+  /* ---------- 过渡 ---------- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ================= Element UI 样式覆盖 ================= */
+
+/* 主按钮 (Primary) - 主色绿 */
+.el-button--primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: #fff !important;
+}
+.el-button--primary:hover, .el-button--primary:focus {
+  background-color: var(--color-primary-dark) !important;
+  border-color: var(--color-primary-dark) !important;
+}
+.el-button--primary.is-plain {
+  background-color: var(--color-primary-light) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+.el-button--primary.is-plain:hover, .el-button--primary.is-plain:focus {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: #fff !important;
+}
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:hover {
+  background-color: #b3e19d !important;
+  border-color: #b3e19d !important;
+  color: #fff !important;
+}
+
+/* 成功按钮 (Success) */
+.el-button--success {
+  background-color: var(--color-success) !important;
+  border-color: var(--color-success) !important;
+  color: #fff !important;
+}
+.el-button--success:hover, .el-button--success:focus {
+  background-color: var(--color-primary-dark) !important;
+  border-color: var(--color-primary-dark) !important;
+}
+.el-button--success.is-plain {
+  background-color: var(--color-primary-light) !important;
+  border-color: var(--color-success) !important;
+  color: var(--color-success) !important;
+}
+.el-button--success.is-plain:hover, .el-button--success.is-plain:focus {
+  background-color: var(--color-success) !important;
+  border-color: var(--color-success) !important;
+  color: #fff !important;
+}
+
+/* 警告按钮 (Warning) */
+.el-button--warning {
+  background-color: var(--color-warning) !important;
+  border-color: var(--color-warning) !important;
+  color: #fff !important;
+}
+.el-button--warning:hover, .el-button--warning:focus {
+  opacity: 0.85;
+}
+.el-button--warning.is-plain {
+  background-color: #fdf6ec !important;
+  border-color: var(--color-warning) !important;
+  color: var(--color-warning) !important;
+}
+.el-button--warning.is-plain:hover, .el-button--warning.is-plain:focus {
+  background-color: var(--color-warning) !important;
+  border-color: var(--color-warning) !important;
+  color: #fff !important;
+}
+
+/* 危险按钮 (Danger) */
+.el-button--danger {
+  background-color: var(--color-danger) !important;
+  border-color: var(--color-danger) !important;
+  color: #fff !important;
+}
+.el-button--danger:hover, .el-button--danger:focus {
+  opacity: 0.85;
+}
+.el-button--danger.is-plain {
+  background-color: #fef0f0 !important;
+  border-color: var(--color-danger) !important;
+  color: var(--color-danger) !important;
+}
+.el-button--danger.is-plain:hover, .el-button--danger.is-plain:focus {
+  background-color: var(--color-danger) !important;
+  border-color: var(--color-danger) !important;
+  color: #fff !important;
+}
+.el-button--danger.is-disabled, .el-button--danger.is-disabled:hover {
+  background-color: #fab6b6 !important;
+  border-color: #fab6b6 !important;
+  color: #fff !important;
+}
+.el-button--danger.is-plain.is-disabled, .el-button--danger.is-plain.is-disabled:hover {
+  background-color: #fef0f0 !important;
+  border-color: #fde2e2 !important;
+  color: #f9a7a7 !important;
+}
+
+/* 链接文字颜色 */
+.el-link.el-link--primary {
+  color: var(--color-primary) !important;
+}
+
+/* 文字按钮（表格里的「编辑/详情/查看」等）—— Element 默认是蓝色，统一为主色 */
+.el-button--text {
+  color: var(--color-primary);
+}
+.el-button--text:hover,
+.el-button--text:focus {
+  color: var(--color-primary-dark);
+}
+.el-button--text.is-disabled,
+.el-button--text.is-disabled:hover {
+  color: var(--text-placeholder);
+}
+
+/* 默认标签底色（Element 默认淡蓝）—— 统一为中性浅灰，让语义标签更突出 */
+.el-tag {
+  background-color: var(--bg-body);
+  border-color: var(--border-color-light);
+  color: var(--text-regular);
+}
+
+/* 分页激活颜色 */
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: var(--color-primary) !important;
+}
+
+/* 输入框聚焦颜色 */
+.el-input__inner:focus, .el-textarea__inner:focus {
+  border-color: var(--color-primary) !important;
+}
+
+/* 标签页激活颜色 */
+.el-tabs__item.is-active {
+  color: var(--color-primary) !important;
+}
+.el-tabs__active-bar {
+  background-color: var(--color-primary) !important;
+}
+
+/* Checkbox 选中颜色 */
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: var(--color-primary) !important;
+}
+
+/* Radio 选中颜色 */
+.el-radio__input.is-checked .el-radio__inner {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
+}
+.el-radio__input.is-checked + .el-radio__label {
+  color: var(--color-primary) !important;
+}
+
+/* Switch 打开颜色 */
+.el-switch.is-checked .el-switch__core {
+  border-color: var(--color-primary) !important;
+  background-color: var(--color-primary) !important;
+}
+
+/* ================= 表格 / 弹窗 统一（原先散落在各 Manager 页的 :deep 覆盖） ================= */
+
+.el-table {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-size: var(--font-md);
+}
+.el-table th.el-table__cell {
+  background-color: #fafafa !important;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background-color: #fafcff;
+}
+.el-table .el-button--text {
+  padding: 4px 6px;
+}
+
+.el-dialog {
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+.el-dialog__header {
+  border-bottom: 1px solid var(--border-color-light);
+  padding-bottom: 16px;
+}
+.el-dialog__title {
+  color: var(--text-main);
+  font-weight: 600;
+}
+.el-dialog__footer {
+  border-top: 1px solid var(--border-color-light);
+  padding-top: 16px;
+}
+
+.el-card {
+  border-radius: var(--radius-md);
+  border-color: var(--border-color-light);
+}
+
+/* ================= 后台管理页 公共结构（原先 11 个 Manager 页逐页复制） ================= */
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+.admin-page-header h2 {
+  margin: 0;
+  font-size: var(--font-xl);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.admin-search-bar {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-card);
+}
+
+.admin-table-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+}
+
+/* ================= 通用辅助类 ================= */
+.text-primary { color: var(--color-primary) !important; }
+.text-secondary { color: var(--color-secondary) !important; }
+.text-danger { color: var(--color-danger) !important; }
+.text-warning { color: var(--color-warning) !important; }
+
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-secondary { background-color: var(--color-secondary) !important; }
+
+/* 价格专用样式 - 统一橙色 + 等宽数字 */
+.price-text {
+  color: var(--color-price);
+  font-family: 'DIN', 'Roboto', 'miSans', sans-serif;
+  font-weight: 700;
+}
+
+/* 渐变背景类 */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+}
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+}
+
+/* 购买按钮专用类 - 主色绿渐变 */
+.btn-buy {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)) !important;
+  border: none !important;
+  color: #fff !important;
+  box-shadow: 0 4px 10px rgba(103, 194, 58, 0.3);
+  transition: all 0.3s ease;
+}
+.btn-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(103, 194, 58, 0.4);
+}
