@@ -27,8 +27,38 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Resource
     private UserService userService;
 
+    /**
+     * 匿名可读的接口前缀。
+     *
+     * 只放行 GET：这些资源游客也要能浏览，但同路径下的写操作
+     * （如 POST /api/product 新增商品）仍然必须带令牌。
+     */
+    private static final String[] PUBLIC_GET_PREFIXES = {
+            "/api/product", "/api/category", "/api/carousel",
+            "/api/notice", "/api/article", "/api/review", "/api/file"
+    };
+
+    /** 判断是否为「匿名可读」的 GET 请求。 */
+    private boolean isPublicGet(HttpServletRequest request) {
+        if (!"GET".equalsIgnoreCase(request.getMethod())) {
+            return false;
+        }
+        String uri = request.getRequestURI();
+        for (String prefix : PUBLIC_GET_PREFIXES) {
+            if (uri.equals(prefix) || uri.startsWith(prefix + "/")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 匿名可读的 GET 直接放行（游客浏览商品、分类、公告等）
+        if (isPublicGet(request)) {
+            return true;
+        }
+
         String token = request.getHeader("token");
         if (StringUtils.isBlank(token)) {
             token = request.getParameter("token");

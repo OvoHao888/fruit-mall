@@ -50,15 +50,28 @@ window.onerror = function(message, url, lineNumber) {
     console.error("发生未捕获的错误:", message);
 };
   
+// 取出当前登录用户的令牌。
+// 后台管理员登录后存在 backUser，前台用户存在 frontUser，两者都含 token；
+// 登录接口另外还会单独写一个 token 键，作为兜底。
+const pickToken = () => {
+    for (const key of ['backUser', 'frontUser']) {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        try {
+            const token = JSON.parse(raw).token;
+            if (token) return token;
+        } catch (e) {
+            console.error('Token parsing error:', e);
+        }
+    }
+    return localStorage.getItem('token') || '';
+};
+
 request.interceptors.request.use(
     config => {
-        const user = localStorage.getItem('backUser');
-        if (user) {
-            try {
-                config.headers['token'] = JSON.parse(user).token;
-            } catch (e) {
-                console.error('Token parsing error:', e);
-            }
+        const token = pickToken();
+        if (token) {
+            config.headers['token'] = token;
         }
         return config;
     },

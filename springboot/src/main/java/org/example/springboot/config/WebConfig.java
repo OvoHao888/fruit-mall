@@ -52,17 +52,26 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加JWT拦截器，应用?/api/**"路径下的请求
         registry.addInterceptor(jwtInterceptor)
-                // 添加拦截路径模式
+                // 拦截 /api/** 下的全部请求
                 .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/**")
-                // 排除不需要拦截的路径模式
-                .excludePathPatterns("/api/user/login")  // 登录接口不需要拦?
-                .excludePathPatterns("/api/user/forget") // 忘记密码接口不需要拦?
-                .excludePathPatterns("/api/user/add")         // 用户信息接口不需要拦?       \
-                .excludePathPatterns("/api/user/{id}")         // 用户信息接口不需要拦?
-                .excludePathPatterns("/api/email/**") // 发送邮件接口不需要拦?
-                .excludePathPatterns("/api/img/**")     // 图片资源接口不需要拦?
-                .excludePathPatterns("/api/file/**")
-                .excludePathPatterns("/api/doc.html","/api/webjars/**","/api/favicon.ico").excludePathPatterns("/api/checkIn/**");
+                // 以下路径完全不校验令牌
+                .excludePathPatterns(
+                        // 认证相关
+                        "/api/user/login",
+                        "/api/user/add",
+                        "/api/user/forget",
+                        // 注册验证码邮件
+                        "/api/email/**",
+                        // 静态资源与接口文档
+                        "/api/img/**",
+                        "/api/doc.html",
+                        "/api/webjars/**",
+                        "/api/favicon.ico"
+                );
+
+        // 说明：商品、分类、轮播、公告、文章、评论这些「匿名可读」的接口
+        // 不在这里放行 —— excludePathPatterns 不区分 HTTP 方法，
+        // 一旦写成 /api/product/**，连 POST/PUT/DELETE 的商品写接口都会被放开。
+        // 它们的放行由 JwtInterceptor 按「GET + 路径前缀」单独判断。
     }
 }
