@@ -15,6 +15,13 @@
 */
 
 SET NAMES utf8mb4;
+
+-- 建库与选库：原导出文件缺少这两句，直接导入会报 "No database selected"
+CREATE DATABASE IF NOT EXISTS `db_mall`
+  DEFAULT CHARACTER SET utf8mb4
+  COLLATE utf8mb4_general_ci;
+USE `db_mall`;
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
