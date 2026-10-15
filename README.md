@@ -30,7 +30,7 @@
 | 后端框架 | Spring Boot 3 |
 | 数据访问 | MyBatis-Plus |
 | 数据库 | MySQL 8 |
-| 缓存 | Caffeine + Spring Cache（`@Cacheable` / `@CacheEvict`） |
+| 缓存 | Caffeine(L1) + Redis(L2) 两级缓存（Spring Cache 注解） |
 | 认证鉴权 | Spring Security + JWT |
 | 邮件 | Spring Mail（注册验证码） |
 | 大模型 | Spring AI（OpenAI 兼容接口） |
@@ -39,7 +39,7 @@
 ## 项目结构
 
 ```
-程序/
+fruit-mall/
 ├── springboot/                          # 后端（Maven 工程）
 │   └── src/main/
 │       ├── java/org/example/springboot/
@@ -85,7 +85,18 @@ cp application-local.properties.example application-local.properties
 然后编辑 `application-local.properties` 填入真实值。
 该文件已加入 `.gitignore`，不会被提交。
 
-### 3. 启动后端
+### 3. 启动 Redis
+
+两级缓存需要本地 Redis（**不起也能跑** —— Redis 不可用时会自动降级为仅用 L1，
+但日志会持续输出 WARN）：
+
+```bash
+redis-server
+```
+
+默认连 `127.0.0.1:6379`，可用环境变量 `REDIS_HOST` / `REDIS_PORT` 覆盖。
+
+### 4. 启动后端
 
 ```bash
 cd springboot
@@ -94,7 +105,7 @@ mvn spring-boot:run
 
 后端端口 `1234`。
 
-### 4. 启动前端
+### 5. 启动前端
 
 ```bash
 cd vue

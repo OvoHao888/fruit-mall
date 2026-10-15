@@ -30,7 +30,7 @@
       </el-form-item>
 
       <div class="login-options">
-        <el-checkbox v-model="rememberMe">记住密码</el-checkbox>
+        <el-checkbox v-model="rememberMe">记住用户名</el-checkbox>
         <el-link type="success" @click="$router.push('/forget')" class="forget-link">
           忘记密码？
         </el-link>
@@ -99,7 +99,6 @@ export default {
       if (remember) {
         this.rememberMe = true;
         this.loginForm.username = localStorage.getItem('username') || '';
-        this.loginForm.password = localStorage.getItem('password') || '';
       }
     },
     onLogin() {
@@ -144,7 +143,6 @@ export default {
                 if (this.rememberMe) {
                   localStorage.setItem('rememberMe', 'true');
                   localStorage.setItem('username', this.loginForm.username);
-                  localStorage.setItem('password', this.loginForm.password);
                 } else {
                   localStorage.removeItem('rememberMe');
                   localStorage.removeItem('username');
