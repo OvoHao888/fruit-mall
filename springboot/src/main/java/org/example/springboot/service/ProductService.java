@@ -183,8 +183,11 @@ public class ProductService {
         }
         return Result.error("-1", "未找到商品");
     }
+    // 注意：key 在方法执行【之前】求值，因此不能用 #result —— 那时它必然是 null。
+    // 好在 condition 已经把「所有筛选条件都为 null」限定住了，
+    // 这种情况下结果只取决于分页与排序参数，用它们做 key 就足够唯一。
     @Cacheable(value = "productPages",
-            key = "{#currentPage, #size, #sortField, #sortOrder, T(org.example.springboot.util.CacheUtil).generateIdFingerprint(#result)}",
+            key = "{#currentPage, #size, #sortField, #sortOrder}",
             condition = "#name == null && #categoryId == null && #merchantId == null && #status == null && #minPrice == null && #maxPrice == null")
     public Page<Product> getProductsByPage(String name, Long categoryId, Long merchantId, Integer status,
                                            Integer currentPage, Integer size, String sortField, String sortOrder,
